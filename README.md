@@ -32,8 +32,11 @@
 
 ## Screenshots
 
-<img src="screenshots/loading_window.jpg" alt="Loading Window"/>
-<img src="screenshots/main_window.jpg" alt="Main Window"/>
-<img src="screenshots/settings_window.jpg" alt="Settings Window"/>
+Loading Screen
+<img src="screenshots/loading_screen.jpg" alt="Loading Screen"/><br/>
+Main Window
+<img src="screenshots/main_window.jpg" alt="Main Window"/><br/>
+Settings Window
+<img src="screenshots/settings_window.jpg" alt="Settings Window"/><br/>
 
 </div>
