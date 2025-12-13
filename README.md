@@ -32,11 +32,11 @@
 
 ## Screenshots
 
-Loading Screen
+Loading Screen<br/>
 <img src="screenshots/loading_screen.jpg" alt="Loading Screen"/><br/>
-Main Window
+Main Window<br/>
 <img src="screenshots/main_window.jpg" alt="Main Window"/><br/>
-Settings Window
+Settings Window<br/>
 <img src="screenshots/settings_window.jpg" alt="Settings Window"/><br/>
 
 </div>
