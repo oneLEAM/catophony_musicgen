@@ -549,6 +549,7 @@ class App(ctk.CTk):
         self.save_button.configure(state="normal")
         self.play_button.configure(state="normal")
         self.reset_button.configure(state="normal")
+        self.readiness_label.configure(text="Music is ready")
         self.time_label.configure(
             text=f"00:00 / {self._format_time(int(len(self.music_data[1]) / self.music_data[0]))}"
         )
@@ -634,6 +635,8 @@ class App(ctk.CTk):
             self.music_data = None
             self.play_button.configure(state="disabled")
             self.reset_button.configure(state="disabled")
+            self.readiness_label.configure(text="Music is not ready")
+            self.time_label.configure(text="00:00 / 00:00")
         except Exception as e:
             self.fake_terminal.log(f"Something went wrong while saving: {e}")
 
