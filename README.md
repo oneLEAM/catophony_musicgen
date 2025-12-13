@@ -32,8 +32,8 @@
 
 ## Screenshots
 
-![Loading Window](screenshots/loading_window.jpg)
-![Main Window](screenshots/main_window.jpg)
-![Settings Window](screenshots/settings_window.jpg)
+<img src="screenshots/loading_window.jpg" alt="Loading Window"/>
+<img src="screenshots/main_window.jpg" alt="Main Window"/>
+<img src="screenshots/settings_window.jpg" alt="Settings Window"/>
 
 </div>
