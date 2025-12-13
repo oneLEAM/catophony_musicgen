@@ -80,20 +80,20 @@ class SettingsWindow(ctk.CTkToplevel):
     def _detect_models(self) -> list:
         """Returns list of downloaded musicgen models"""
         models = []
-        for directory in os.listdir(os.path.join(os.path.abspath(__file__).rsplit(src.config.SEPARATOR, 1)[0], "generators", "models")):
+        for directory in os.listdir(src.config.MODELS_DIR):
             if "musicgen" == directory.split("-", 1)[0]:
                 models.append(directory)
         return models
 
     def _uninstall_model(self, model_name: str, index: int):
         """Uninstalls target model"""
-        shutil.rmtree(f"src/generators/models/{model_name}")
+        shutil.rmtree(os.path.join(src.config.MODELS_DIR, model_name))
         self.buttons[index].configure(text="Uninstalled", state="disabled")
 
     def _on_option_menu_choice(self, model_name: str):
         """Changes music model in settings.json to chosen one"""
         try:
-            with open("src/settings.json", "w", encoding="utf-8") as json_file:
+            with open(os.path.join(src.config.CONFIG_DIR, "settings.json"), "w", encoding="utf-8") as json_file:
                 json.dump({"music_model": f"{model_name}"}, json_file, indent=4)
             title = "Notification"
             message = "Changes will take effect after restart"
@@ -134,7 +134,7 @@ class SettingsWindow(ctk.CTkToplevel):
         
         self.info_frame = ctk.CTkFrame(self)
         self.info_frame.pack(side="bottom", anchor="nw", padx=15, fill="x", pady=10)
-        self.version_oneleam_label = ctk.CTkLabel(self.info_frame, text="v0.1.0b by oneLEAM")
+        self.version_oneleam_label = ctk.CTkLabel(self.info_frame, text=f"{src.config.APP_VERSION} by oneLEAM")
         self.version_oneleam_label.pack(side="left")
         self.view_github_button = ctk.CTkButton(self.info_frame, text="View on GitHub", command=lambda: webbrowser.open("https://github.com/oneLEAM/catophony_musicgen"))
         self.view_github_button.pack(side="right")
@@ -186,7 +186,7 @@ class App(ctk.CTk):
     """Main window class"""
     def __init__(self):
         # Getting app's theme
-        theme_path = os.path.join("src", "themes", "main_theme.json")
+        theme_path = os.path.join(src.config.BASE_DIR, "themes", "main_theme.json")
         ctk.set_default_color_theme(theme_path)
 
         super().__init__()
@@ -198,18 +198,22 @@ class App(ctk.CTk):
         self.DISABLED_TEXT_COLOR = "#9E7D05"
 
         # Loading fonts
-        name_font_path = os.path.join("src", "fonts", "Tektur-Bold.ttf")
+        name_font_path = os.path.join(src.config.BASE_DIR, "fonts", "Tektur-Bold.ttf")
         ctk.FontManager.load_font(name_font_path)
-        font_path = os.path.join("src", "fonts", "Tektur-Regular.ttf")
+        font_path = os.path.join(src.config.BASE_DIR, "fonts", "Tektur-Regular.ttf")
         ctk.FontManager.load_font(font_path)
 
         # Setting app's icon
-        icon_path = os.path.join("src", "pics", "icon.png")
-        icon_image = PhotoImage(file=icon_path)
-        self.iconphoto(True, icon_image)
+        if src.config.OS == "Linux":
+            icon_path = os.path.join(src.config.BASE_DIR, "pics", "icon.png")
+            icon_image = PhotoImage(file=icon_path)
+            self.iconphoto(True, icon_image)
+        elif src.config.OS == "Windows":
+            icon_path = os.path.join(src.config.BASE_DIR, "pics", "icon.ico")
+            self.iconbitmap(icon_path)
 
         # Getting logo
-        logo_path = os.path.join("src", "pics", "logo.png")
+        logo_path = os.path.join(src.config.BASE_DIR, "pics", "logo.png")
         self.logo = ctk.CTkImage(
             light_image=Image.open(logo_path),
             dark_image=Image.open(logo_path),
@@ -245,7 +249,7 @@ class App(ctk.CTk):
     def _detect_models(self) -> list:
         """Returns list of downloaded text and music models"""
         models = []
-        for directory in os.listdir(os.path.join(os.path.abspath(__file__).rsplit(src.config.SEPARATOR, 1)[0], "generators", "models")):
+        for directory in os.listdir(src.config.MODELS_DIR):
             models.append(directory)
         return models
 
@@ -618,7 +622,7 @@ class App(ctk.CTk):
             ]
         )
 
-        if not file_path:
+        if not file_path or file_path.rsplit(".", 1)[-1] not in ["mp3", "wav", "flac", "ogg"]:
             self.save_button.configure(state="normal")
             return
 

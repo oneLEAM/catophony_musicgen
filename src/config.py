@@ -1,8 +1,35 @@
 import json
+import os
+from pathlib import Path
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+APP_VERSION = "0.1.1b"
 
 AVAILABLE_MODELS = ["facebook/musicgen-small", "facebook/musicgen-medium", "facebook/musicgen-large"]
 
-with open("src/settings.json", "r", encoding="utf-8") as json_file:
+OS = "Linux" # Write there "Windows" instead of "Linux" if you use it
+
+if OS == "Linux":
+    CONFIG_DIR = os.path.join(os.path.expanduser("~"), ".local", "share", "catophony", "config")
+    MODELS_DIR = os.path.join(os.path.expanduser("~"), ".local", "share", "catophony", "models")
+elif OS == "Windows":
+    CONFIG_DIR = os.path.join(os.path.expanduser("~"), "AppData", "Local", "catophony", "config")
+    MODELS_DIR = os.path.join(os.path.expanduser("~"), "AppData", "Local", "catophony", "models")
+else:
+    raise ValueError("constant OS must be \"Linux\" or \"Windows\"")
+
+Path(CONFIG_DIR).mkdir(parents=True, exist_ok=True)
+Path(MODELS_DIR).mkdir(parents=True, exist_ok=True)
+
+if not Path(os.path.join(CONFIG_DIR, "settings.json")).exists():
+    Path(os.path.join(CONFIG_DIR, "settings.json")).touch()
+    default_settings = {"music_model": "facebook/musicgen-small"}
+    
+    with open(os.path.join(CONFIG_DIR, "settings.json"), "w", encoding="utf-8") as json_file:
+        json.dump(default_settings, json_file, indent=4, ensure_ascii=False)
+
+with open(os.path.join(CONFIG_DIR, "settings.json"), "r", encoding="utf-8") as json_file:
     music_model = json.load(json_file)["music_model"]
     if music_model in AVAILABLE_MODELS:
         MUSIC_MODEL = music_model
@@ -11,14 +38,10 @@ with open("src/settings.json", "r", encoding="utf-8") as json_file:
 
 TEXT_MODEL = "Qwen/Qwen3-1.7B"
 
-OS = "Linux" # Write there "Windows" instead of "Linux" if you use it
-
-if OS == "Linux":
-    SEPARATOR = "/"
-elif OS == "Windows":
-    SEPARATOR = "\\"
-else:
-    raise ValueError("constant OS must be \"Linux\" or \"Windows\"")
+with open(os.path.join(BASE_DIR, "fake_logs.json"), "r", encoding="utf-8") as json_file:
+    FAKE_LOGS = json.load(json_file)["fake_logs"]
+    if not isinstance(FAKE_LOGS, list):
+        raise ValueError(f"constant FAKE_LOGS must be a list type, not a {type(FAKE_LOGS)}")
 
 REFINE_PROMPT = """You are an expert prompt engineer for text-to-music models such as Facebook MusicGen. Your task is to rewrite the user's input into a single, clear, production-ready music description in English that can be used directly as a prompt for a text-to-music model.
 
@@ -39,8 +62,3 @@ Your task:
 - You may slightly reorder words if needed to sound natural in English, but do not significantly shorten or expand the content.
 - Output only the translated prompt in English, with no explanations, notes, or the original text.
 """
-
-with open("src/fake_logs.json", "r", encoding="utf-8") as json_file:
-    FAKE_LOGS = json.load(json_file)["fake_logs"]
-    if not isinstance(FAKE_LOGS, list):
-        raise ValueError(f"constant FAKE_LOGS must be a list type, not a {type(FAKE_LOGS)}")

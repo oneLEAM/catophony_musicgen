@@ -12,13 +12,13 @@ class MusicGenerator():
     def __init__(self):
         model = src.config.MUSIC_MODEL
         model_name = model.split("/")[-1]
-        save_path = f"src/generators/models/{model_name}"
+        save_path = os.path.join(src.config.MODELS_DIR, model_name)
         
         # Checking if there enough space for the model
         model_size = self._get_model_size(model)
         
         if not os.path.isdir(save_path):
-            _, _, free_space = shutil.disk_usage(os.path.abspath(__file__).rsplit(src.config.SEPARATOR, 1)[0])
+            _, _, free_space = shutil.disk_usage(src.config.MODELS_DIR)
             
             if model_size >= free_space:
                 raise MemoryError(f"No left space for music model.\nRequired space: {model_size / (1024 ** 3):.1f} GB\nFree space: {free_space / (1024 ** 3):.1f} GB")

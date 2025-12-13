@@ -8,12 +8,14 @@
 ![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
 ![License](https://img.shields.io/badge/license-GPLv3-green.svg)
 
-## Download
-[![Download](https://img.shields.io/badge/Download-Releases-green?style=for-the-badge&logo=github)](https://github.com/oneLEAM/catophony_musicgen/releases)
+## Download for Linux and Windows
+[![Download](https://img.shields.io/badge/Download-Releases-yellow?style=for-the-badge&logo=github)](https://github.com/oneLEAM/catophony_musicgen/releases)
 
 *Requires a decent CPU and at least 16GB of RAM.*
 
 ## Features
+
+</div>
 
 <div align="left">
 
@@ -25,5 +27,13 @@
 * 💾 Listen to your generated music instantly and save your tracks in various formats.
 
 </div>
+
+<div align="center">
+
+## Screenshots
+
+![Loading Window](screenshots/loading_window.jpg)
+![Main Window](screenshots/main_window.jpg)
+![Settings Window](screenshots/settings_window.jpg)
 
 </div>
