@@ -32,11 +32,13 @@
 
 ## Screenshots
 
-Loading Screen<br/>
-<img src="screenshots/loading_screen.jpg" alt="Loading Screen"/><br/>
-Main Window<br/>
-<img src="screenshots/main_window.jpg" alt="Main Window"/><br/>
-Settings Window<br/>
-<img src="screenshots/settings_window.jpg" alt="Settings Window"/><br/>
+<img src="screenshots/loading_screen_downloading.png" alt="Loading Screen: Downloading models"/><br/>
+*Loading Screen: Downloading models*<br/><br/>
+<img src="screenshots/loading_screen.png" alt="Loading Screen"/><br/>
+*Loading Screen*<br/><br/>
+<img src="screenshots/main_window.png" alt="Main Window"/><br/>
+*Main Window*<br/><br/>
+<img src="screenshots/settings_window.png" alt="Settings Window"/><br/>
+*Settings Window*<br/><br/>
 
 </div>
