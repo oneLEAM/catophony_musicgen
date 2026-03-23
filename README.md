@@ -32,13 +32,13 @@
 
 ## Screenshots
 
-<img src="screenshots/loading_screen_downloading.png" alt="Loading Screen: Downloading models"/><br/>
+<img src="screenshots/loading_screen_downloading.avif" alt="Loading Screen: Downloading models"/><br/>
 *Loading Screen: Downloading models*<br/><br/>
-<img src="screenshots/loading_screen.png" alt="Loading Screen"/><br/>
+<img src="screenshots/loading_screen.avif" alt="Loading Screen"/><br/>
 *Loading Screen*<br/><br/>
-<img src="screenshots/main_window.png" alt="Main Window"/><br/>
+<img src="screenshots/main_window.avif" alt="Main Window"/><br/>
 *Main Window*<br/><br/>
-<img src="screenshots/settings_window.png" alt="Settings Window"/><br/>
+<img src="screenshots/settings_window.avif" alt="Settings Window"/><br/>
 *Settings Window*<br/><br/>
 
 </div>
