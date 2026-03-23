@@ -1,23 +1,27 @@
 import json
 import os
 from pathlib import Path
+import sys
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-APP_VERSION = "0.1.1b"
+APP_VERSION = "0.1.2b"
 
 AVAILABLE_MODELS = ["facebook/musicgen-small", "facebook/musicgen-medium", "facebook/musicgen-large"]
 
-OS = "Linux" # Write there "Windows" instead of "Linux" if you use it
+OS = sys.platform
 
-if OS == "Linux":
+if OS == "linux":
     CONFIG_DIR = os.path.join(os.path.expanduser("~"), ".local", "share", "catophony", "config")
     MODELS_DIR = os.path.join(os.path.expanduser("~"), ".local", "share", "catophony", "models")
-elif OS == "Windows":
+elif OS == "win32":
     CONFIG_DIR = os.path.join(os.path.expanduser("~"), "AppData", "Local", "catophony", "config")
     MODELS_DIR = os.path.join(os.path.expanduser("~"), "AppData", "Local", "catophony", "models")
+elif OS == "darwin":
+    CONFIG_DIR = os.path.join(os.path.expanduser("~"), "Library", "Application Support", "catophony", "config")
+    MODELS_DIR = os.path.join(os.path.expanduser("~"), "Library", "Application Support", "catophony", "models")
 else:
-    raise ValueError("constant OS must be \"Linux\" or \"Windows\"")
+    raise ValueError("constant OS must be \"Linux\", \"Windows\" or \"Darwin\"")
 
 Path(CONFIG_DIR).mkdir(parents=True, exist_ok=True)
 Path(MODELS_DIR).mkdir(parents=True, exist_ok=True)
